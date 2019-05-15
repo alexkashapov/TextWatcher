@@ -19,23 +19,34 @@ class MainActivity : AppCompatActivity() {
             var mask = "________"
             var oldValue = ""
             var newValue = ""
+            var max = false
             var start = 0
             var count = 0
             var after = 0
             var reg = Regex("\\_*\\.*\\_*\\.*\\_*")
+            var selection = 0
 
             override fun afterTextChanged(s: Editable?) {
+                if (max) {
+                    max = false
+                    return
+                }
+                newValue = s.toString()
+                if (newValue.length == 11) {
+                    max=true
+                    edit.setText(oldValue)
+                }
                 Log.d("AFTER", s.toString().replace(reg, ""))
-                if(ignore){
+                if (ignore) {
                     ignore = false
                     return
                 }
                 val clean = s.toString().replace(reg, "")
-                if (clean.length < mask.length) {
+                if (clean.length <= mask.length) {
                     var submask = mask.substring(clean.length, mask.length)
                     Log.d("AFTER2", submask)
                     var resultBuild = StringBuilder();
-                    for (i in 0..mask.length-1) {
+                    for (i in 0..mask.length - 1) {
                         if (i < clean.length) {
                             resultBuild.append(clean[i])
                         } else {
@@ -51,7 +62,12 @@ class MainActivity : AppCompatActivity() {
                     }
                     ignore = true
                     edit.setText(resultBuild.toString())
-                    edit.setSelection(start+count)
+                    if (clean.length == 3)
+                        edit.setSelection(clean.length + 1)
+                    else if (clean.length >= 4)
+                        edit.setSelection(clean.length + 2)
+                    else edit.setSelection(clean.length)
+                    Log.d("selection", edit.selectionStart.toString())
                     Log.d("AFTER3", resultBuild.toString())
                 }
 //                )
@@ -106,12 +122,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
+                selection = edit.selectionStart
+                oldValue = s.toString()
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                this.start = start
-                this.count = count
+
             }
 
         }
