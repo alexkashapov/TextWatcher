@@ -9,7 +9,70 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
-    val regex = Regex("^\\d\\d\\.\\d\\d\\.\\d\\d\\d\\d\$")
+//    val regex = Regex("^\\d\\d\\.\\d\\d\\.\\d\\d\\d\\d\$")
+//    val tw = object : TextWatcher {
+//        var ignore = false
+//        var max = false
+//        var mask = "______"
+//        var originalMask ="__.__.__"
+//        var oldValue = ""
+//        var newValue = ""
+//        var start = 0
+//        var count = 0
+//        var after = 0
+//        var reg = Regex("\\_*\\.*\\_*\\.*\\_*")
+
+//        override fun afterTextChanged(s: Editable?) {
+//            if(max){
+//                max = false
+//                return
+//            }
+//            newValue = s.toString()
+//            val clean = s.toString().replace(reg, "")
+//
+//
+//            if (ignore) {
+//                ignore = false
+//                return
+//            }
+//            if(clean.length>6){
+//                max=true
+//                edit.setText(oldValue)
+//                edit.setSelection(oldValue.length-1)
+//                return
+//            }
+//
+//            var resultBuilder = StringBuilder()
+//            for(i in 0..clean.length-1){
+//                resultBuilder.append(clean[i])
+//            }
+//            for(i in clean.length..mask.length-1){
+//                resultBuilder.append('_')
+//            }
+//            resultBuilder.insert(2,'.')
+//            resultBuilder.insert(5,'.')
+//            ignore=true
+//            edit.setText(resultBuilder.toString())
+//            if(clean.length<2){
+//                edit.setSelection(clean.length)
+//            }
+//            else if(clean.length<4){
+//                edit.setSelection(clean.length+1)
+//            }
+//            else edit.setSelection(clean.length+2)
+//            Log.d("TEST",resultBuilder.toString())
+//        }
+//
+//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            oldValue=s.toString()
+//        }
+//
+//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//            Log.d("DELETE","$start $before $count")
+//        }
+//
+//    }
+//    edit.addTextChangedListener(tw)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
